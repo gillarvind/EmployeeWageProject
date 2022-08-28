@@ -8,8 +8,8 @@ namespace EmployeeWageCode
 {
     internal class EmployeeWage
     {
-        const int IS_FULL_TIME = 0, IS_PART_TIME = 1, WAGE_PER_HOUR = 20, FULL_TIME_HR = 8, PART_TIME_HR = 4;
-        int totalEmpWage = 0, empHrs = 0;
+        const int IS_FULL_TIME = 0, IS_PART_TIME = 1, WAGE_PER_HOUR = 20, FULL_TIME_HR = 8, PART_TIME_HR = 4, WORKING_DAYS = 20;
+        int totalEmpWage, empHrs = 0;
         public void Attendence()
         {
             Random random = new Random();
@@ -26,15 +26,18 @@ namespace EmployeeWageCode
         public void CalculateEmpWage()
         {
             Random random = new Random();
-            int empCheck = random.Next(0, 3);
-            switch (empCheck)
+            for (int i = 0; i < WORKING_DAYS; i++)
             {
-                case IS_FULL_TIME:
-                    empHrs = FULL_TIME_HR;
-                    break;
-                case IS_PART_TIME:
-                    empHrs = PART_TIME_HR;
-                    break;
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
+                {
+                    case IS_FULL_TIME:
+                        empHrs += FULL_TIME_HR;
+                        break;
+                    case IS_PART_TIME:
+                        empHrs += PART_TIME_HR;
+                        break;
+                }
             }
             totalEmpWage = WAGE_PER_HOUR * empHrs;
             Console.WriteLine(totalEmpWage);
